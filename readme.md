@@ -6,6 +6,8 @@ Like [marcgrep.pl](https://pusc.it/bib/MARCgrep) but in Python and a bit differe
 
 ## Installation
 
+TODO: publish to PyPI.
+
 ```sh
 pipx install marcgrep # install globally with pipx
 pip install marcgrep # or use pip/pip3
@@ -15,6 +17,7 @@ pip install marcgrep # or use pip/pip3
 
 ```sh
 marcgrep OPTIONS FILE.mrc
+marcgrep -h # see full usage information
 ```
 
 ## Development
