@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "marcgrep"
+version = "0.1.0"
+description = "search MARC files for regex matches"
+authors = ["phette23 <phette23@gmail.com>"]
+license = "MIT"
+readme = "readme.md"
+homepage = "https://github.com/phette23/marcgreppy"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pymarc = "5.1.2"
+click = "8.1.7"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "8.1.1"
+
+[tool.poetry.scripts]
+marcgrep = "marcgrep.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["marcgrep"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
