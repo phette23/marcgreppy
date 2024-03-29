@@ -16,8 +16,21 @@ pip install marcgrep # or use pip/pip3
 ## Usage
 
 ```sh
-marcgrep OPTIONS FILE.mrc
-marcgrep -h # see full usage information
+# general command format
+$ marcgrep OPTIONS FILE.mrc
+$ cat FILE.mrc | marcgrep OPTIONS
+# full usage information
+$ marcgrep -h
+Usage: marcgrep [OPTIONS] [FILE]
+
+  Find MARC records matching patterns in a file.
+
+Options:
+  -h, --help          Show this message and exit.
+  -v, --version       Show marcgrep version
+  -c, --count         Count matching records
+  -i, --include TEXT  Include matching records
+  -e, --exclude TEXT  Exclude matching records
 ```
 
 ## Development
@@ -25,9 +38,10 @@ marcgrep -h # see full usage information
 - [x] -c count
 - [x] -v version
 - [ ] -l limit (number of records to process)
-- [ ] -i include criteria (multiple)
-- [ ] -e exclude criteria (multiple)
+- [x] -i include criteria (multiple)
+- [x] -e exclude criteria (multiple)
 - [ ] -f fields to print
+- [ ] work with MARC leader
 - [ ] --progress?
 
 ```sh
