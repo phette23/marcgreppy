@@ -38,6 +38,8 @@ with open(Path("test") / "fixtures" / "one_record.mrc", "rb") as fh:
         ("245,1,0,,Kulturpolitik", True),
         ("245,2,0,,Kulturpolitik", False),
         ("245,1,2,,Kulturpolitik", False),
+        # curly braces in value https://github.com/phette23/marcgreppy/issues/1
+        ("653,a,curly", True),
     ],
 )
 def test_single_inclusive_filter_matches(input, expected):

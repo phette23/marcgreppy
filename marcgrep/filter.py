@@ -82,13 +82,12 @@ class Filter:
                 if (
                     self.value
                     and not any(
-                        re.match(self.value, subfield.format())
-                        for subfield in subfields
+                        re.search(self.value, subfield) for subfield in subfields
                     )
                     or not len(subfields)
                 ):
                     continue
-            if self.value and not re.match(self.value, field.format_field()):
+            if self.value and not re.search(self.value, field.format_field()):
                 continue
             # if we get here, the filter matched
             return result

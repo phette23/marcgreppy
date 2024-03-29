@@ -7,7 +7,7 @@ from marcgrep.cli import main
 
 OAPEN = str(Path("test") / "fixtures" / "OAPEN.mrc")
 ONE_RECORD = str(Path("test") / "fixtures" / "one_record.mrc")
-ONE_RECORD_LINES = 65
+ONE_RECORD_LINES = 66
 PLAIN_TEXT = str(Path("test") / "fixtures" / "plain.txt")
 
 
@@ -57,11 +57,10 @@ class TestCLI:
         runner = CliRunner()
         result = runner.invoke(
             main,
-            ["test/fixtures/OAPEN.mrc", "--include", "245,a,Kulturpolitik"],
+            ["test/fixtures/OAPEN.mrc", "--include", "245,Kulturpolitik", "-c"],
         )
         assert result.exit_code == 0
-        assert len(result.output.splitlines()) == ONE_RECORD_LINES
-        assert "Kulturpolitik" in result.output
+        assert len(result.output.splitlines()) == 1
 
     def test_one_exclude_print(self):
         runner = CliRunner()
