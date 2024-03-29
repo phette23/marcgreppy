@@ -24,6 +24,7 @@ def main(
 ):
     if version:
         print(metadata.version("marcgrep"))
+        return exit(0)
 
     num_records = 0
     reader = MARCReader(file)
