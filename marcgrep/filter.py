@@ -1,3 +1,5 @@
+import re
+
 from pymarc import Record
 
 
@@ -68,5 +70,26 @@ class Filter:
             )
 
     def match(self, record: Record) -> bool:
-        # TODO
-        return True
+        result = self.inclusive
+        for field in record.get_fields(self.field):
+            # print(re.match(self.value, field.format_field()))
+            if self.ind1 and field.indicator1 != self.ind1:
+                continue
+            if self.ind2 and field.indicator2 != self.ind2:
+                continue
+            if self.subfield:
+                subfields = field.get_subfields(self.subfield)
+                if (
+                    self.value
+                    and not any(
+                        re.match(self.value, subfield.format())
+                        for subfield in subfields
+                    )
+                    or not len(subfields)
+                ):
+                    continue
+            if self.value and not re.match(self.value, field.format_field()):
+                continue
+            # if we get here, the filter matched
+            return result
+        return not result
