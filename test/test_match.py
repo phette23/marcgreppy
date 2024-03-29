@@ -46,4 +46,24 @@ def test_single_inclusive_filter_matches(input, expected):
     assert f.match(record) == expected
 
 
-# TODO test exclusive filters
+@pytest.mark.parametrize(
+    "input,expected",
+    [
+        ("245,1,,a,Kulturpolitik", False),
+        ("245,1,0,,Kulturpolitik", False),
+        ("245,2,0,,Kulturpolitik", True),
+        ("245,1,2,,Kulturpolitik", True),
+        ("245,.*politik", False),
+        ("245,.*string that's not there", True),
+        ("653,a,.*werke", False),
+        # indicators
+        ("245,1,,,", False),
+        ("245,1,0,,", False),
+        ("245,2,0,,", True),
+        ("245,1,2,,", True),
+    ],
+)
+def test_single_exclusive_filter_matches(input, expected):
+    f = Filter(input, inclusive=False)
+    assert record is not None
+    assert f.match(record) == expected
