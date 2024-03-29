@@ -1,4 +1,6 @@
 from io import BufferedReader
+from pathlib import Path
+
 from pymarc import MARCReader
 import pytest
 
@@ -7,7 +9,7 @@ from marcgrep.utils import count_records
 
 # helper method since our functions expect a MARCReader
 def reader_from_fixture(file: str) -> tuple[MARCReader, BufferedReader]:
-    fh = open(f"test/fixtures/{file}", "rb")
+    fh = open(Path("test") / "fixtures" / file, "rb")
     return MARCReader(fh), fh
 
 
@@ -15,7 +17,7 @@ def reader_from_fixture(file: str) -> tuple[MARCReader, BufferedReader]:
     "input, expected",
     [
         ("plain.txt", 0),
-        ("OAPEN-CCONLY-20240307.mrc", 500),
+        ("OAPEN.mrc", 500),
     ],
 )
 def test_count(input, expected):
