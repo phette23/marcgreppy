@@ -8,6 +8,8 @@ Like [marcgrep.pl](https://pusc.it/bib/MARCgrep) but in Python and a bit differe
 
 TODO: publish to PyPI.
 
+Python 3.9 or later. [Poetry](https://python-poetry.org/) is used for development.
+
 ```sh
 pipx install marcgrep # install globally with pipx
 pip install marcgrep # or use pip/pip3
