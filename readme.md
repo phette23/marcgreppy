@@ -45,7 +45,7 @@ $ marcgrep -i '245,Ulysses' FILE.mrc
 # titles _without_ "Collected Poems" in the 245 $a subfield
 $ marcgrep -e '245,a,Collected Poems' FILE.mrc
 # titles with second indicator = 4 that do not start with "The "
-$ marcgrep -i '245,,4,,^!(The )' FILE.mrc
+$ marcgrep -i '245,,4,,^(?!The )' FILE.mrc
 ```
 
 The meaning of the pattern's components depends upon their number:
