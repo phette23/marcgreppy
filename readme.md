@@ -1,12 +1,10 @@
 # marcgrep
 
-Like [marcgrep.pl](https://pusc.it/bib/MARCgrep) but in Python and a bit different syntax.
+A CLI for searching MARC files like [MARCgrep.pl](https://pusc.it/bib/MARCgrep) but in Python and a bit different syntax.
 
 [marcli](https://github.com/hectorcorrea/marcli) is also a similar project that's faster but a little less flexible.
 
 ## Installation
-
-TODO: publish to PyPI.
 
 Python 3.9 or later. [Poetry](https://python-poetry.org/) is used for development.
 
@@ -69,7 +67,6 @@ Multiple criteria are combined with logical AND. Multiple `--include` flags is n
 - [x] -e exclude criteria (multiple)
 - [ ] -f fields to print
 - [ ] work with MARC leader
-- [ ] --progress?
 - [ ] regex for all components? e.g. `24.,text in any 240-249 field`
 - [ ] relatedly, specify _not_ to treat value as a regex?
 
