@@ -21,7 +21,7 @@ classifiers = [
 "Issues" = "https://github.com/phette23/marcgreppy/issues"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">3.8"
 pymarc = "5.1.2"
 click = "8.1.7"
 
