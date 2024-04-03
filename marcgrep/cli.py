@@ -5,7 +5,6 @@ import click
 from pymarc import MARCReader
 
 from .filter import Filter
-from .utils import count_records
 
 
 @click.command(help="Find MARC records matching patterns in a file.")
@@ -34,12 +33,6 @@ def main(
     # build a list of filters, start with exclusive because they rule out records quicker
     filters = [Filter(pattern, inclusive=False) for pattern in exclude]
     filters.extend(Filter(pattern) for pattern in include)
-
-    if not len(filters) and count:
-        matched_records = count_records(reader)
-        print(matched_records)
-        # non-zero exit if no records found
-        return exit(0 if matched_records else 1)
 
     for record in reader:
         if record:
