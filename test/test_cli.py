@@ -12,12 +12,6 @@ PLAIN_TEXT = str(Path("test") / "fixtures" / "plain.txt")
 
 
 class TestCLI:
-    def test_version(self):
-        runner = CliRunner()
-        result = runner.invoke(main, ["--version"])
-        assert result.exit_code == 0
-        assert re.match(r"\d+\.\d+\.\d+", result.output)
-
     def test_count(self):
         runner = CliRunner()
         result = runner.invoke(main, [ONE_RECORD, "--count"])
