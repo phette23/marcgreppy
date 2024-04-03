@@ -1,4 +1,5 @@
-from typing import BinaryIO
+import math
+from typing import BinaryIO, Literal
 
 import click
 from pymarc import MARCReader
@@ -17,14 +18,17 @@ from .utils import count_records
 @click.option(
     "--exclude", "-e", help="Exclude matching records (repeatable)", multiple=True
 )
+@click.option("--limit", "-l", help="Limit number of records to process", type=int)
 @click.version_option(package_name="marcgrep", message="%(prog)s %(version)s")
 def main(
     file: BinaryIO,
     count: bool,
     include: list[str],
     exclude: list[str],
+    limit: int,
 ):
-    num_records = 0
+    counter = 0
+    matched_records = 0
     reader = MARCReader(file)
 
     # build a list of filters, start with exclusive because they rule out records quicker
@@ -34,26 +38,29 @@ def main(
     # if no filters, count or print all records
     if not len(filters):
         if count:
-            num_records = count_records(reader)
-            print(num_records)
+            matched_records = count_records(reader)
+            print(matched_records)
             # non-zero exit if no records found
-            return exit(0 if num_records else 1)
+            return exit(0 if matched_records else 1)
         for record in reader:
             print(record)
         return exit(0)
 
     for record in reader:
         if record:
+            counter += 1
             if all(f.match(record) for f in filters):
-                num_records += 1
+                matched_records += 1
                 if not count:
                     print(record)
+            if limit and counter >= limit:
+                break
 
     if count:
-        print(num_records)
+        print(matched_records)
 
     # non-zero exit if no records match
-    return exit(0 if num_records else 1)
+    return exit(0 if matched_records else 1)
 
 
 if __name__ == "__main__":

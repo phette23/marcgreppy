@@ -26,11 +26,12 @@ Usage: marcgrep [OPTIONS] [FILE]
   Find MARC records matching patterns in a file.
 
 Options:
-  -h, --help          Show this message and exit.
-  -v, --version       Show marcgrep version
-  -c, --count         Count matching records
-  -i, --include TEXT  Include matching records (repeatable)
-  -e, --exclude TEXT  Exclude matching records (repeatable)
+  -h, --help           Show this message and exit.
+  -c, --count          Count matching records
+  -i, --include TEXT   Include matching records (repeatable)
+  -e, --exclude TEXT   Exclude matching records (repeatable)
+  -l, --limit INTEGER  Limit number of records to process
+  --version            Show the version and exit.
 ```
 
 The `--include` and `--exclude` flags can be used multiple times to specify multiple criteria. They accept a pattern which is a sort of comma-separated filter expression for matching MARC fields. Examples:
@@ -62,7 +63,7 @@ Multiple criteria are combined with logical AND. Multiple `--include` flags is n
 
 - [x] -c count
 - [x] -v version
-- [ ] -l limit (number of records to process)
+- [x] -l limit (number of records to process)
 - [x] -i include criteria (multiple)
 - [x] -e exclude criteria (multiple)
 - [ ] -f fields to print

@@ -2,6 +2,7 @@ from pathlib import Path
 import re
 
 from click.testing import CliRunner
+import pytest
 
 from marcgrep.cli import main
 
@@ -135,3 +136,15 @@ class TestCLI:
         )
         assert result.exit_code == 0
         assert len(result.output.splitlines()) == ONE_RECORD_LINES
+
+    @pytest.mark.parametrize(
+        "input,expected", [("1", "1"), ("10", "10"), ("100", "100")]
+    )
+    def test_limit(self, input, expected):
+        runner = CliRunner()
+        # all records have a 245 so the limit = the count
+        result = runner.invoke(
+            main, [OAPEN, "--limit", input, "-c", "--include", "245"]
+        )
+        assert result.exit_code == 0
+        assert result.output == f"{expected}\n"
