@@ -35,16 +35,11 @@ def main(
     filters = [Filter(pattern, inclusive=False) for pattern in exclude]
     filters.extend(Filter(pattern) for pattern in include)
 
-    # if no filters, count or print all records
-    if not len(filters):
-        if count:
-            matched_records = count_records(reader)
-            print(matched_records)
-            # non-zero exit if no records found
-            return exit(0 if matched_records else 1)
-        for record in reader:
-            print(record)
-        return exit(0)
+    if not len(filters) and count:
+        matched_records = count_records(reader)
+        print(matched_records)
+        # non-zero exit if no records found
+        return exit(0 if matched_records else 1)
 
     for record in reader:
         if record:
