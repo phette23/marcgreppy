@@ -6,7 +6,7 @@ A CLI for searching MARC files like [MARCgrep.pl](https://pusc.it/bib/MARCgrep) 
 
 ## Installation
 
-Python 3.9 or later. [Poetry](https://python-poetry.org/) is used for development.
+Python 3.9 or later.
 
 ```sh
 pipx install marcgrep # install globally with pipx
@@ -61,6 +61,8 @@ Multiple criteria are combined with logical AND. Multiple `--include` flags is n
 
 ## Development
 
+[Poetry](https://python-poetry.org/) is used for development.
+
 - [x] -c count
 - [x] -v version
 - [x] -l limit (number of records to process)
@@ -75,6 +77,8 @@ Multiple criteria are combined with logical AND. Multiple `--include` flags is n
 poetry install # install dependencies
 poetry run pytest # run tests
 ```
+
+Any tag triggers a release to [Test PyPI](https://test.pypi.org/project/marcgrep/). Any tag beginning with the letter `v` requires manual approval to be released to [PyPI](https://pypi.org/project/marcgrep/) and [GitHub](https://github.com/phette23/marcgreppy/releases). There are protection rules on the `pypi` and `testpypi` [environments](https://github.com/phette23/marcgreppy/settings/environments) to this effect, too.
 
 ## License
 
