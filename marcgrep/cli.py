@@ -17,6 +17,7 @@ from .filter import Filter
 @click.option(
     "--exclude", "-e", help="Exclude matching records (repeatable)", multiple=True
 )
+@click.option("--fields", "-f", help="Comma-separated list of fields to print")
 @click.option("--limit", "-l", help="Limit number of records to process", type=int)
 @click.version_option(package_name="marcgrep", message="%(prog)s %(version)s")
 def main(
@@ -24,6 +25,7 @@ def main(
     count: bool,
     include: list[str],
     exclude: list[str],
+    fields: str,
     limit: int,
 ):
     counter = 0
@@ -40,7 +42,11 @@ def main(
             if all(f.match(record) for f in filters):
                 matched_records += 1
                 if not count:
-                    print(record)
+                    if fields:
+                        for f in record.get_fields(*fields.split(",")):
+                            print(f)
+                    else:
+                        print(record)
             if limit and counter >= limit:
                 break
 

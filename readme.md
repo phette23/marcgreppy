@@ -30,6 +30,7 @@ Options:
   -c, --count          Count matching records
   -i, --include TEXT   Include matching records (repeatable)
   -e, --exclude TEXT   Exclude matching records (repeatable)
+  -f, --fields TEXT    Comma-separated list of fields to print
   -l, --limit INTEGER  Limit number of records to process
   --version            Show the version and exit.
 ```
@@ -68,7 +69,7 @@ Multiple criteria are combined with logical AND. Multiple `--include` flags is n
 - [x] -l limit (number of records to process)
 - [x] -i include criteria (multiple)
 - [x] -e exclude criteria (multiple)
-- [ ] -f fields to print
+- [x] -f fields to print
 - [ ] work with MARC leader
 - [ ] regex for all components? e.g. `24.,text in any 240-249 field`
 - [ ] relatedly, specify _not_ to treat value as a regex?

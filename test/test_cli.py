@@ -137,6 +137,21 @@ class TestCLI:
         assert result.exit_code == 0
         assert len(result.output.splitlines()) == ONE_RECORD_LINES
 
+    def test_fields(self):
+        runner = CliRunner()
+        result = runner.invoke(main, [ONE_RECORD, "--fields", "245"])
+        assert result.exit_code == 0
+        assert len(result.output.splitlines()) == 1
+        assert "Kulturpolitik" in result.output
+        assert "Bielefeld" not in result.output
+        # two fields, there's 1 245 and 34 (!) 653s
+        result = runner.invoke(main, [ONE_RECORD, "--fields", "245,653"])
+        assert result.exit_code == 0
+        assert len(result.output.splitlines()) == 1 + 34
+        assert "Kulturpolitik" in result.output
+        assert "Bielefeld" not in result.output
+        assert "Network Analysis" in result.output
+
     @pytest.mark.parametrize(
         "input,expected", [("1", "1"), ("10", "10"), ("100", "100")]
     )
