@@ -1,5 +1,4 @@
-import math
-from typing import BinaryIO, Literal
+from typing import BinaryIO
 
 import click
 from pymarc import MARCReader
