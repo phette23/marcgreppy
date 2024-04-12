@@ -73,6 +73,7 @@ Multiple criteria are combined with logical AND. Multiple `--include` flags is n
 - [ ] work with MARC leader
 - [ ] regex for all components? e.g. `24.,text in any 240-249 field`
 - [ ] relatedly, specify _not_ to treat value as a regex?
+- [ ] colorize output?
 
 ```sh
 poetry install # install dependencies
