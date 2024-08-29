@@ -27,6 +27,7 @@ Usage: marcgrep [OPTIONS] [FILE]
 
 Options:
   -h, --help           Show this message and exit.
+  --color              Colorize mnemonic MARC output
   -c, --count          Count matching records
   -i, --include TEXT   Include matching records (repeatable)
   -e, --exclude TEXT   Exclude matching records (repeatable)
@@ -70,10 +71,10 @@ Multiple criteria are combined with logical AND. Multiple `--include` flags is n
 - [x] -i include criteria (multiple)
 - [x] -e exclude criteria (multiple)
 - [x] -f fields to print
+- [x] colorize output?
 - [ ] work with MARC leader
 - [ ] regex for all components? e.g. `24.,text in any 240-249 field`
 - [ ] relatedly, specify _not_ to treat value as a regex?
-- [ ] colorize output?
 
 ```sh
 poetry install # install dependencies

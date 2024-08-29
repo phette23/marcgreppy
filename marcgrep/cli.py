@@ -3,12 +3,14 @@ from typing import BinaryIO
 import click
 from pymarc import MARCReader
 
+from .color import color_field, color_record
 from .filter import Filter
 
 
 @click.command(help="Find MARC records matching patterns in a file.")
 @click.help_option("-h", "--help")
 @click.argument("file", type=click.File("rb"), default="-")
+@click.option("--color", help="Colorize mnemonic MARC output", is_flag=True)
 @click.option("--count", "-c", help="Count matching records", is_flag=True)
 @click.option(
     "--include", "-i", help="Include matching records (repeatable)", multiple=True
@@ -21,6 +23,7 @@ from .filter import Filter
 @click.version_option(package_name="marcgrep", message="%(prog)s %(version)s")
 def main(
     file: BinaryIO,
+    color: bool,
     count: bool,
     include: list[str],
     exclude: list[str],
@@ -43,9 +46,15 @@ def main(
                 if not count:
                     if fields:
                         for f in record.get_fields(*fields.split(",")):
-                            print(f)
+                            if color:
+                                color_field(f)
+                            else:
+                                print(f)
                     else:
-                        print(record)
+                        if color:
+                            color_record(record)
+                        else:
+                            print(record)
             if limit and counter >= limit:
                 break
 
