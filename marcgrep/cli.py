@@ -32,7 +32,7 @@ def main(
     reader = MARCReader(file)
 
     # build a list of filters, start with exclusive because they rule out records quicker
-    filters = [Filter(pattern, inclusive=False) for pattern in exclude]
+    filters: list[Filter] = [Filter(pattern, inclusive=False) for pattern in exclude]
     filters.extend(Filter(pattern) for pattern in include)
 
     for record in reader:

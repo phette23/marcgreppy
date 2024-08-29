@@ -3,10 +3,12 @@ import re
 from pymarc import Record
 
 
-def parse_pattern(pattern):
-    parts = pattern.split(",")
+def parse_pattern(
+    pattern: str,
+) -> tuple[str | None, str | None, str | None, str | None, str | None]:
+    pts: list[str] = pattern.split(",")
     # Convert empty strings to None to support "123,,,,value" use case
-    parts = [part if part else None for part in parts]
+    parts: list[str | None] = [part if part else None for part in pts]
     # 3.10 Match-Case would be better here
     # We prioritize the field, then the value, then the subfield, and indicators come last
     if len(parts) == 1:
@@ -18,7 +20,7 @@ def parse_pattern(pattern):
     if len(parts) == 4:
         return parts[0], parts[1], None, parts[2], parts[3]
     # combine the rest into the value, convert Nones past the 4th index back to empty string
-    value = ",".join([p if p else "" for p in parts[4:]])
+    value: str = ",".join([p if p else "" for p in parts[4:]])
     return parts[0], parts[1], parts[2], parts[3], value
 
 
@@ -27,16 +29,18 @@ class FilterFormatError(Exception):
 
 
 class Filter:
-    def __init__(self, pattern, inclusive=True) -> None:
+    def __init__(self, pattern: str, inclusive: bool = True) -> None:
         """Pettern is a comma-separated string like
         FIELD,INDICATOR1,INDICATOR2,SUBFIELD,VALUE
         where only FIELD is required and VALUE can itself contain commas
         e.g. 245,cat in the hat -> field:245, value:cat in the hat
         245,4,0,a,cat in the hat -> field:245, ind1:4, ind2:0, subfield:a, value:cat in the hat
         """
-        self.inclusive = inclusive
-        self.pattern = pattern
-        parts = parse_pattern(pattern)
+        self.inclusive: bool = inclusive
+        self.pattern: str = pattern
+        parts: tuple[str | None, str | None, str | None, str | None, str | None] = (
+            parse_pattern(pattern)
+        )
         self.field: str | None = parts[0]
         self.ind1: str | None = parts[1]
         self.ind2: str | None = parts[2]
@@ -70,7 +74,7 @@ class Filter:
             )
 
     def match(self, record: Record) -> bool:
-        result = self.inclusive
+        result: bool = self.inclusive
         for field in record.get_fields(self.field):
             # print(re.match(self.value, field.format_field()))
             if self.ind1 and field.indicator1 != self.ind1:
