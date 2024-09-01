@@ -1,4 +1,4 @@
-# marcgrep
+# marcgrep ![PyPI](https://img.shields.io/pypi/v/marcgrep)
 
 A CLI for searching MARC files like [MARCgrep.pl](https://pusc.it/bib/MARCgrep) but in Python and a bit different syntax.
 
