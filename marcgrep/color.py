@@ -40,14 +40,15 @@ def color_field(field: Field) -> None:
     # control fields have neither indicators nor subfields
     if field.is_control_field():
         cprint(f"{field.tag}", COLORS["TAG"], end=" ")
-        return cprint(f"{field.value()}", COLORS["DATA"], end="")
-    cprint(f"{field.tag}", COLORS["TAG"], end=" ")
-    cprint(f"{field.indicator1 if field.indicator1 != " " else EMPTY_INDICATOR}{field.indicator2 if field.indicator2 != " " else EMPTY_INDICATOR}", COLORS["INDICATOR"], end=" ")
-    for subfield in field.subfields:
-        cprint(
-            f"{DELIMITER}{subfield.code}", COLORS["SUBFIELD"], end=""
-        )
-        cprint(f"{subfield.value}", COLORS["DATA"], end="")
+        cprint(f"{field.value()}", COLORS["DATA"], end="")
+    else:
+        cprint(f"{field.tag}", COLORS["TAG"], end=" ")
+        cprint(f"{field.indicator1 if field.indicator1 != " " else EMPTY_INDICATOR}{field.indicator2 if field.indicator2 != " " else EMPTY_INDICATOR}", COLORS["INDICATOR"], end=" ")
+        for subfield in field.subfields:
+            cprint(
+                f"{DELIMITER}{subfield.code}", COLORS["SUBFIELD"], end=""
+            )
+            cprint(f"{subfield.value}", COLORS["DATA"], end="")
     print()
 
 
