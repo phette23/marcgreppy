@@ -1,14 +1,18 @@
 import re
+from typing import Union
 
 from pymarc import Record
+
+# Python 3.9 does not support "|" union syntax for type hints
+nullable_str = Union[str, None]
 
 
 def parse_pattern(
     pattern: str,
-) -> tuple[str | None, str | None, str | None, str | None, str | None]:
+) -> tuple[nullable_str, nullable_str, nullable_str, nullable_str, nullable_str]:
     pts: list[str] = pattern.split(",")
     # Convert empty strings to None to support "123,,,,value" use case
-    parts: list[str | None] = [part if part else None for part in pts]
+    parts: list[nullable_str] = [part if part else None for part in pts]
     # 3.10 Match-Case would be better here
     # We prioritize the field, then the value, then the subfield, and indicators come last
     if len(parts) == 1:
@@ -38,14 +42,14 @@ class Filter:
         """
         self.inclusive: bool = inclusive
         self.pattern: str = pattern
-        parts: tuple[str | None, str | None, str | None, str | None, str | None] = (
-            parse_pattern(pattern)
-        )
-        self.field: str | None = parts[0]
-        self.ind1: str | None = parts[1]
-        self.ind2: str | None = parts[2]
-        self.subfield: str | None = parts[3]
-        self.value: str | None = parts[4]
+        parts: tuple[
+            nullable_str, nullable_str, nullable_str, nullable_str, nullable_str
+        ] = parse_pattern(pattern)
+        self.field: nullable_str = parts[0]
+        self.ind1: nullable_str = parts[1]
+        self.ind2: nullable_str = parts[2]
+        self.subfield: nullable_str = parts[3]
+        self.value: nullable_str = parts[4]
         self.validate()
 
     def __repr__(self) -> str:
