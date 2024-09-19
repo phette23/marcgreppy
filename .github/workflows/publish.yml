@@ -22,11 +22,10 @@ jobs:
           uses: actions/cache@v4
           with:
               path: ~/.local
-              key: poetry-1.8.2
+              key: ${{ runner.os }}-poetry
 
-        - uses: snok/install-poetry@v1
-          with:
-            version: 1.8.2
+        - name: Install Poetry
+          run: pipx install poetry
 
         - name: Build
           run: poetry build
