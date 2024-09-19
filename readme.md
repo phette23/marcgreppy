@@ -83,20 +83,10 @@ You can also configure the subfield delimiter character and the symbol for an em
 
 [Poetry](https://python-poetry.org/) is used for development.
 
-- [x] -c count
-- [x] -v version
-- [x] -l limit (number of records to process)
-- [x] -i include criteria (multiple)
-- [x] -e exclude criteria (multiple)
-- [x] -f fields to print
-- [x] colorize output?
-- [ ] work with MARC leader
-- [ ] regex for all components? e.g. `24.,text in any 240-249 field`
-- [ ] relatedly, specify _not_ to treat value as a regex?
-
 ```sh
 poetry install # install dependencies
 poetry run pytest # run tests
+poetry build # build package, used in CI
 ```
 
 Any tag triggers a release to [Test PyPI](https://test.pypi.org/project/marcgrep/). Any tag beginning with the letter `v` requires manual approval to be released to [PyPI](https://pypi.org/project/marcgrep/) and [GitHub](https://github.com/phette23/marcgreppy/releases). There are protection rules on the `pypi` and `testpypi` [environments](https://github.com/phette23/marcgreppy/settings/environments) to this effect, too.
