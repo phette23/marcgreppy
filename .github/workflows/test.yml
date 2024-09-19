@@ -29,22 +29,15 @@ jobs:
                     python-version: ${{ matrix.python-version }}
 
             # Cache the installation of Poetry itself, e.g. the next step. This prevents the workflow
-            # from installing Poetry every time, which can be slow. Note the use of the Poetry version
-            # number in the cache key.
+            # from installing Poetry every time, which can be slow.
             - name: cache poetry install
               uses: actions/cache@v4
               with:
                   path: ~/.local
-                  key: poetry-1.8.2
+                  key: ${{ runner.os }}-poetry
 
-            # Install Poetry. You could do this manually, or there are several actions that do this.
-            # `snok/install-poetry` seems to be minimal yet complete, and really just calls out to
-            # Poetry's default install script, which feels correct. I pin the Poetry version here
-            # because Poetry does occasionally change APIs between versions and I don't want my
-            # actions to break if it does.
-            - uses: snok/install-poetry@v1
-              with:
-                version: 1.8.2
+            - name: Install Poetry
+              run: pipx install poetry
 
             - name: Cache Poetry packages
               id: cache-deps
