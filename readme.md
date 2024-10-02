@@ -17,10 +17,10 @@ pip install marcgrep # or use pip/pip3
 
 ```sh
 # general command format
-$ marcgrep OPTIONS FILE.mrc
-$ cat FILE.mrc | marcgrep OPTIONS
+marcgrep OPTIONS FILE.mrc
+cat FILE.mrc | marcgrep OPTIONS
 # full usage information
-$ marcgrep -h
+marcgrep -h
 Usage: marcgrep [OPTIONS] [FILE]
 
   Find MARC records matching patterns in a file.
@@ -40,24 +40,26 @@ The `--include` and `--exclude` flags can be used multiple times to specify mult
 
 ```sh
 # records with a 780 field
-$ marcgrep -i 780 FILE.mrc
+marcgrep -i 780 FILE.mrc
 # records with Ulysses in the 245 field
-$ marcgrep -i '245,Ulysses' FILE.mrc
-# titles _without_ "Collected Poems" in the 245 $a subfield
-$ marcgrep -e '245,a,Collected Poems' FILE.mrc
+marcgrep -i '245,Ulysses' FILE.mrc
+# titles _without_ "Collected Poems" in the 245 ‡a subfield
+marcgrep -e '245,a,Collected Poems' FILE.mrc
 # titles with second indicator = 4 that do not start with "The "
-$ marcgrep -i '245,,4,,^(?!The )' FILE.mrc
+marcgrep -i '245,,4,,^(?!The )' FILE.mrc
 ```
 
-The meaning of the pattern's components depends upon their number:
+The meaning of the filter expression's components depends upon their number:
 
 - 1: field, `910` -> 910 is in record
 - 2: field and value (regular expression), `100,Lorde` -> 100 contains string "Lorde"
-- 3: field, subfield, and value, `506,a,Open Access` -> 506$a contains string "Open Access"
-- 4: field, subfield, first indicator, and value, `856,0,u,@lcsh\.gov` -> 856$u with 1st indicator 0 contains string "@lcsh.gov"
+- 3: field, subfield, and value, `506,a,Open Access` -> 506‡a contains string "Open Access"
+- 4: field, subfield, first indicator, and value, `856,0,u,@lcsh\.gov` -> 856‡u with 1st indicator 0 contains string "@lcsh.gov"
 - 5: field, subfield, first & second indicators, and value, `245,0,4,a,The Communist Manifesto`
 
-The intention of this syntax is to facilitate searching subfields and field values more easily than MARCgrep.pl since we care about them more often than indicators. To ignore a component but use one of lesser priority, leave the component empty. For instance, `856,s,` refers to records with an `856` field with a `$s` subfield but the trailing comma means we don't care about the subfield's value. The pattern `245,,4,,` refers to records with a `245` field with a second indicator of `4` regardless its subfields or value.
+The intention of this syntax is to facilitate searching subfields and field values more easily than MARCgrep.pl since we care about them more often than indicators. To ignore a component but use one of lesser priority, leave the component empty. For instance, `856,s,` refers to records with an `856` field with an `s` subfield but the trailing comma means we don't care about the subfield's value. The pattern `245,,4,,` refers to records with a `245` field with a second indicator of `4` regardless its subfields or value.
+
+To use a literal comma in a value pattern, include all the other components. For instance, to search for "Morrison, Toni" anywhere in a `100` field, use `100,,,,Morrison, Toni`.
 
 Multiple criteria are combined with logical AND. Multiple `--include` flags is narrower than one, as is an `--include` and an `--exclude`.
 
