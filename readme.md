@@ -16,8 +16,8 @@ pip install marcgrep # or use pip/pip3
 ## Usage
 
 ```sh
-# general command format
-marcgrep OPTIONS FILE.mrc
+# general command format - pass one or more files or pipe stdin
+marcgrep OPTIONS FILE1.mrc FILE2.mrc
 cat FILE.mrc | marcgrep OPTIONS
 # full usage information
 marcgrep -h

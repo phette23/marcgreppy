@@ -17,13 +17,13 @@ class TestCLI:
         runner = CliRunner()
         result = runner.invoke(main, [ONE_RECORD, "--count"])
         assert result.exit_code == 0
-        assert result.output == "1\n"
+        assert result.output == f"{ONE_RECORD}: 1\n"
         result = runner.invoke(main, [PLAIN_TEXT, "-c"])
         assert result.exit_code == 1
-        assert result.output == "0\n"
+        assert result.output == f"{PLAIN_TEXT}: 0\n"
         result = runner.invoke(main, [OAPEN, "-c"])
         assert result.exit_code == 0
-        assert result.output == "500\n"
+        assert result.output == f"{OAPEN}: 500\n"
 
     def test_print(self):
         runner = CliRunner()
@@ -162,4 +162,21 @@ class TestCLI:
             main, [OAPEN, "--limit", input, "-c", "--include", "245"]
         )
         assert result.exit_code == 0
-        assert result.output == f"{expected}\n"
+        assert result.output == f"{OAPEN}: {expected}\n"
+
+    def test_glob(self):
+        runner = CliRunner()
+        result = runner.invoke(
+            main,
+            ["--count", OAPEN, ONE_RECORD],
+        )
+        assert result.exit_code == 0
+        assert result.output == f"{OAPEN}: 500\n{ONE_RECORD}: 1\n"
+        # should still work with stdin
+        result = runner.invoke(
+            main,
+            ["-f", "245", "-"],
+            input=open(ONE_RECORD, "rb").read(),
+        )
+        assert result.exit_code == 0
+        assert len(result.output.splitlines()) == 1
