@@ -20,8 +20,7 @@ pip install marcgrep # or use pip/pip3
 marcgrep OPTIONS FILE1.mrc FILE2.mrc
 cat FILE.mrc | marcgrep OPTIONS
 # full usage information
-marcgrep -h
-Usage: marcgrep [OPTIONS] [FILE]
+Usage: marcgrep [OPTIONS] [FILES]...
 
   Find MARC records matching patterns in a file.
 
@@ -33,6 +32,7 @@ Options:
   -f, --fields TEXT    Comma-separated list of fields to print
   -l, --limit INTEGER  Limit number of records to process
   --color              Colorize mnemonic MARC output
+  --invert             Invert color scheme (for light terminal backgrounds)
   --version            Show the version and exit.
 ```
 
@@ -73,6 +73,8 @@ The `--color` flag lets you pick colors for various parts of a MARC record using
 | Indicator | light_yellow | MARC_INDICATOR_COLOR |
 | Subfield code | green | MARC_SUBFIELD_COLOR |
 | Data | white | MARC_DATA_COLOR |
+
+There is an inverted color scheme available with the `--invert` flag for use with light (e.g. white) terminal backgrounds.
 
 You can also configure the subfield delimiter character and the symbol for an empty indicator. Those defaults are:
 

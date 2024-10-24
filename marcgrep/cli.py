@@ -21,10 +21,16 @@ from .filter import Filter
 @click.option("--fields", "-f", help="Comma-separated list of fields to print")
 @click.option("--limit", "-l", help="Limit number of records to process", type=int)
 @click.option("--color", help="Colorize mnemonic MARC output", is_flag=True)
+@click.option(
+    "--invert",
+    help="Invert color scheme (for light terminal backgrounds)",
+    is_flag=True,
+)
 @click.version_option(package_name="marcgrep", message="%(prog)s %(version)s")
 def main(
     files: List[BinaryIO],
     color: bool,
+    invert: bool,
     count: bool,
     include: list[str],
     exclude: list[str],
@@ -34,6 +40,11 @@ def main(
     # handle stdin if no files are provided
     if not files:
         files = [sys.stdin.buffer]
+
+    if invert and not color:
+        click.echo(
+            "The --invert flag was passed without --color, it has no effect.", err=True
+        )
 
     any_matches = False
 
@@ -58,12 +69,12 @@ def main(
                         if fields:
                             for f in record.get_fields(*fields.split(",")):
                                 if color:
-                                    color_field(f)
+                                    color_field(f, invert)
                                 else:
                                     print(f)
                         else:
                             if color:
-                                color_record(record)
+                                color_record(record, invert)
                             else:
                                 print(record)
                 if limit and counter >= limit:

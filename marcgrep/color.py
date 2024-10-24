@@ -16,9 +16,17 @@ COLOR_DARK_DEFAULTS: dict[str, Color] = {
     "SUBFIELD": "green",
     "DATA": "white",
 }
+COLOR_LIGHT_DEFAULTS: dict[str, Color] = {
+    "TAG": "blue",
+    "INDICATOR": "dark_grey",
+    "SUBFIELD": "magenta",
+    "DATA": "black",
+}
+DELIMITER: str = env_get("DELIMITER", "‡")
+EMPTY_INDICATOR: str = env_get("EMPTY_INDICATOR", "_")
 
 
-def _set_color_env(token) -> str:
+def _set_color_env(token: str, invert: bool) -> str:
     var = f"{token}_COLOR"
     # validate that termcolor supports the color
     try:
@@ -28,17 +36,28 @@ def _set_color_env(token) -> str:
             f'Invalid color "{environ.get(f"MARC_{var}")}" for MARC_{var}. '
             f"Valid colors are {get_args(Color)}."
         )
+    if invert:
+        return env_get(var, COLOR_LIGHT_DEFAULTS[token])
     return env_get(var, COLOR_DARK_DEFAULTS[token])
 
 
-DELIMITER: str = env_get("DELIMITER", "‡")
-EMPTY_INDICATOR: str = env_get("EMPTY_INDICATOR", "_")
-COLORS = {}
-for token in ["TAG", "INDICATOR", "SUBFIELD", "DATA"]:
-    COLORS[token] = _set_color_env(token)
+def _setup_colors(invert: bool):
+    """Create COLORS global dict from env vars and invert flag
+
+    Args:
+        invert (bool): default to light color scheme
+    """
+    global COLORS
+    COLORS = {}
+    for token in ["TAG", "INDICATOR", "SUBFIELD", "DATA"]:
+        COLORS[token] = _set_color_env(token, invert)
 
 
-def color_field(field: Field) -> None:
+def color_field(field: Field, invert: bool) -> None:
+    # create COLORS global if we have not already
+    if not globals().get("COLOR"):
+        _setup_colors(invert)
+
     # control fields have neither indicators nor subfields
     if field.is_control_field():
         cprint(f"{field.tag}", COLORS["TAG"], end=" ")
@@ -56,7 +75,7 @@ def color_field(field: Field) -> None:
     print()
 
 
-def color_record(record: Record) -> None:
+def color_record(record: Record, invert: bool) -> None:
     for field in record:
-        color_field(field)
+        color_field(field, invert)
     print()
