@@ -1,6 +1,7 @@
 from os import environ
 from typing import get_args
 
+import click
 from pymarc import Field, Record
 from termcolor import cprint
 from termcolor._types import Color
@@ -72,10 +73,10 @@ def color_field(field: Field, invert: bool) -> None:
         for subfield in field.subfields:
             cprint(f"{DELIMITER}{subfield.code}", COLORS["SUBFIELD"], end="")
             cprint(f"{subfield.value}", COLORS["DATA"], end="")
-    print()
+    click.echo()
 
 
 def color_record(record: Record, invert: bool) -> None:
     for field in record:
         color_field(field, invert)
-    print()
+    click.echo()

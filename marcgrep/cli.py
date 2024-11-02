@@ -71,17 +71,17 @@ def main(
                                 if color:
                                     color_field(f, invert)
                                 else:
-                                    print(f)
+                                    click.echo(f)
                         else:
                             if color:
                                 color_record(record, invert)
                             else:
-                                print(record)
+                                click.echo(record)
                 if limit and counter >= limit:
                     break
 
         if count:
-            print(f"{file.name}: {matched_records}")
+            click.echo(f"{file.name}: {matched_records}")
 
     # non-zero exit if no records match
     return exit(0 if any_matches else 1)
