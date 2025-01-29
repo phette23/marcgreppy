@@ -77,6 +77,12 @@ def color_field(field: Field, invert: bool) -> None:
 
 
 def color_record(record: Record, invert: bool) -> None:
+    # create COLORS global if we have not already
+    if not globals().get("COLOR"):
+        _setup_colors(invert)
+
+    cprint("LDR", COLORS["TAG"], end=" ")
+    cprint(record.leader, COLORS["DATA"])
     for field in record:
         color_field(field, invert)
     click.echo()

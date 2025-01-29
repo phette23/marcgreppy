@@ -180,3 +180,9 @@ class TestCLI:
         )
         assert result.exit_code == 0
         assert len(result.output.splitlines()) == 1
+
+    def test_color_leader(self):
+        runner = CliRunner()
+        result = runner.invoke(main, ["--color", ONE_RECORD])
+        assert result.exit_code == 0
+        assert result.output.splitlines()[0] == "LDR 03292namaa2200793uu 4500"
