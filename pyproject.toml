@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "marcgrep"
-version = "1.4.0"
+version = "1.4.1"
 description = "search MARC files for regex matches"
 authors = ["phette23 <phette23@gmail.com>"]
 license = "MIT"
