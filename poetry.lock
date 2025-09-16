@@ -2,14 +2,14 @@
 
 [[package]]
 name = "click"
-version = "8.1.7"
+version = "8.1.8"
 description = "Composable command line interface toolkit"
 optional = false
 python-versions = ">=3.7"
 groups = ["main"]
 files = [
-    {file = "click-8.1.7-py3-none-any.whl", hash = "sha256:ae74fb96c20a0277a1d615f1e4d73c8414f5a98db8b799a7931d1582f3390c28"},
-    {file = "click-8.1.7.tar.gz", hash = "sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de"},
+    {file = "click-8.1.8-py3-none-any.whl", hash = "sha256:63c132bbbed01578a06712a2d1f497bb62d9c1c0d329b7903a866228027263b2"},
+    {file = "click-8.1.8.tar.gz", hash = "sha256:ed53c9d8990d83c2a27deae68e4ee337473f6330c040a31d4225c9574d16096a"},
 ]
 
 [package.dependencies]
@@ -89,14 +89,14 @@ testing = ["coverage", "pytest", "pytest-benchmark"]
 
 [[package]]
 name = "pymarc"
-version = "5.1.2"
+version = "5.3.1"
 description = "Read, write and modify MARC bibliographic data"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "pymarc-5.1.2-py3-none-any.whl", hash = "sha256:719340150adb600e0a3603e8504bc5b3d2f3e134dd73891e4d927b6f6731bb7d"},
-    {file = "pymarc-5.1.2.tar.gz", hash = "sha256:81ce6bfe9b47170f03d8a99209e4211778ade015a67b1eeb6b30862d4e24ae58"},
+    {file = "pymarc-5.3.1-py3-none-any.whl", hash = "sha256:3fcc09f9d51ef27c40f8d215e3219d0f3eb29716a0767e689c4923e38182ad73"},
+    {file = "pymarc-5.3.1.tar.gz", hash = "sha256:d289233d7298aeae45d976081710391cf21e754f73928132508b8adfe8ea0b49"},
 ]
 
 [[package]]
@@ -196,4 +196,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9"
-content-hash = "dfde4753f2baa29a988c1c95cdfc61db99a18dec387650c64fd7df5048687112"
+content-hash = "2b2f83199bddbe0ded76cef5ffc2b6d5dbdc8a4e623f0885671b2a5caec49d87"
