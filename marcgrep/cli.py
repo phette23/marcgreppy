@@ -1,8 +1,8 @@
 import sys
-from typing import IO, BinaryIO, List, Union
+from typing import BinaryIO, List
 
 import click
-from pymarc import Any, MARCReader
+from pymarc import MARCReader
 
 from .color import color_field, color_record
 from .filter import Filter

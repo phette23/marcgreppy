@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from pymarc import MARCReader
 import pytest
+from pymarc import MARCReader
 
 from marcgrep.filter import Filter
 

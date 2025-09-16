@@ -1,6 +1,6 @@
 import pytest
 
-from marcgrep.filter import parse_pattern, Filter, FilterFormatError
+from marcgrep.filter import Filter, FilterFormatError, parse_pattern
 
 
 @pytest.mark.parametrize(

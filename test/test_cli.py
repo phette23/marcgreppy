@@ -1,8 +1,7 @@
 from pathlib import Path
-import re
 
-from click.testing import CliRunner
 import pytest
+from click.testing import CliRunner
 
 from marcgrep.cli import main
 
