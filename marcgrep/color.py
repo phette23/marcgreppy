@@ -1,23 +1,22 @@
 from os import environ
-from typing import get_args
 
 import click
 from pymarc import Field, Record
+from termcolor import COLORS as AVAILABLE_COLORS
 from termcolor import cprint
-from termcolor._types import Color
 
 
 def env_get(key: str, default: str) -> str:
     return environ.get(f"MARC_{key}") or default
 
 
-COLOR_DARK_DEFAULTS: dict[str, Color] = {
+COLOR_DARK_DEFAULTS: dict[str, str] = {
     "TAG": "cyan",
     "INDICATOR": "light_yellow",
     "SUBFIELD": "green",
     "DATA": "white",
 }
-COLOR_LIGHT_DEFAULTS: dict[str, Color] = {
+COLOR_LIGHT_DEFAULTS: dict[str, str] = {
     "TAG": "blue",
     "INDICATOR": "dark_grey",
     "SUBFIELD": "magenta",
@@ -31,11 +30,11 @@ def _set_color_env(token: str, invert: bool) -> str:
     var = f"{token}_COLOR"
     # validate that termcolor supports the color
     try:
-        assert environ.get(f"MARC_{var}", "black") in get_args(Color)
+        assert environ.get(f"MARC_{var}", "black") in AVAILABLE_COLORS.keys()
     except AssertionError:
         raise ValueError(
             f'Invalid color "{environ.get(f"MARC_{var}")}" for MARC_{var}. '
-            f"Valid colors are {get_args(Color)}."
+            f"Valid colors are: {', '.join(AVAILABLE_COLORS.keys())}."
         )
     if invert:
         return env_get(var, COLOR_LIGHT_DEFAULTS[token])

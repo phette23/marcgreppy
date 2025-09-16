@@ -23,8 +23,8 @@ classifiers = [
 [tool.poetry.dependencies]
 click = "8.1.7"
 pymarc = "5.1.2"
-python = ">3.8"
-termcolor = "2.4.0"
+python = ">=3.9"
+termcolor = "3.1.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "8.1.1"
