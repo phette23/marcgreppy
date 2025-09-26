@@ -28,7 +28,7 @@ python = ">=3.9"
 termcolor = "3.1.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "8.1.1"
+pytest = "8.4.2"
 
 [tool.poetry.scripts]
 marcgrep = "marcgrep.cli:main"
