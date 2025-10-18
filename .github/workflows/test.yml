@@ -17,45 +17,20 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                python-version: ["3.9", "3.10", "3.12"]
+                python-version: ["3.9", "3.10", "3.12", "3.13"]
 
         steps:
             - name: Checkout code
               uses: actions/checkout@v5
 
-            - name: Set up Python ${{ matrix.python-version }}
-              uses: actions/setup-python@v6
+            - name: Install uv and set the Python version
+              uses: astral-sh/setup-uv@v6
               with:
-                    python-version: ${{ matrix.python-version }}
+                enable-cache: true
+                python-version: ${{ matrix.python-version }}
 
-            # Cache the installation of Poetry itself, e.g. the next step. This prevents the workflow
-            # from installing Poetry every time, which can be slow.
-            - name: cache poetry install
-              uses: actions/cache@v4
-              with:
-                  path: ~/.local
-                  key: ${{ runner.os }}-poetry
-
-            - name: Install Poetry
-              run: pipx install poetry
-
-            - name: Cache Poetry packages
-              id: cache-deps
-              uses: actions/cache@v4
-              with:
-                    path: ~/.cache/pypoetry
-                    key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
-
-            - name: Install dependencies
-              run: poetry install --no-interaction --no-root
-              if: steps.cache-deps.outputs.cache-hit != 'true'
-
-            # Now install _your_ project. This isn't necessary for many types of projects -- particularly
-            # things like Django apps don't need this. But it's a good idea since it fully-exercises the
-            # pyproject.toml and makes that if you add things like console-scripts at some point that
-            # they'll be installed and working.
-            - name: Install marcgrep
-              run: poetry install --no-interaction
+            - name: Install the project
+              run: uv sync --locked --all-extras --dev
 
             - name: Run tests
-              run: poetry run pytest
+              run: uv run pytest
