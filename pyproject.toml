@@ -1,6 +1,6 @@
 [project]
 name = "marcgrep"
-version = "1.4.1"
+version = "1.4.2"
 description = "search MARC files for regex matches"
 authors = [{name = "Eric Phetteplace", email = "phette23@gmail.com"}]
 license = "MIT"
