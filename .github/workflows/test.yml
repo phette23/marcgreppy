@@ -5,9 +5,20 @@ on:
         branches:
             - dev
             - main
+        # Only run tests on python changes
+        paths:
+            - 'marcgrep/**/*.py'
+            - 'test/**/*.py'
+            - 'pyproject.toml'
+            - 'uv.lock'
     pull_request:
         branches:
             - main
+        paths:
+            - 'marcgrep/**/*.py'
+            - 'test/**/*.py'
+            - 'pyproject.toml'
+            - 'uv.lock'
 
 # using parts of approach from https://jacobian.org/til/github-actions-poetry/
 jobs:
