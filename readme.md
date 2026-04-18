@@ -68,7 +68,7 @@ Multiple criteria are combined with logical AND. Multiple `--include` flags is n
 The `--color` flag lets you pick colors for various parts of a MARC record using environment variables. You can pick from [the available termcolor colors](https://github.com/termcolor/termcolor?tab=readme-ov-file#text-properties). The defaults are:
 
 | Component | Color | Var |
-|---|----|---|
+| --- | ---- | --- |
 | Tag | cyan | MARC_TAG_COLOR |
 | Indicator | light_yellow | MARC_INDICATOR_COLOR |
 | Subfield code | green | MARC_SUBFIELD_COLOR |
@@ -79,7 +79,7 @@ There is an inverted color scheme available with the `--invert` flag for use wit
 You can also configure the subfield delimiter character and the symbol for an empty indicator. Those defaults are:
 
 | Symbol | Var |
-|---|---|
+| --- | --- |
 | ‡ | MARC_SUBFIELD_DELIMITER |
 | _ | MARC_EMPTY_INDICATOR |
 
