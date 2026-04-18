@@ -6,7 +6,7 @@ A CLI for searching MARC files like [MARCgrep.pl](https://pusc.it/bib/MARCgrep) 
 
 ## Installation
 
-Python 3.9 or later.
+Python 3.10 or later.
 
 ```sh
 pipx install marcgrep # install globally with pipx

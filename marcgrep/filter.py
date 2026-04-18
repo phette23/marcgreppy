@@ -1,10 +1,8 @@
 import re
-from typing import Union
 
 from pymarc import Record
 
-# Python 3.9 does not support "|" union syntax for type hints
-nullable_str = Union[str, None]
+nullable_str = str | None
 
 
 def parse_pattern(
@@ -13,7 +11,7 @@ def parse_pattern(
     pts: list[str] = pattern.split(",")
     # Convert empty strings to None to support "123,,,,value" use case
     parts: list[nullable_str] = [part if part else None for part in pts]
-    # 3.10 Match-Case would be better here
+    # TODO 3.10 Match-Case would be better here
     # We prioritize the field, then the value, then the subfield, and indicators come last
     if len(parts) == 1:
         return parts[0], None, None, None, None
