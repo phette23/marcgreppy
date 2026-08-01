@@ -32,7 +32,7 @@ jobs:
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v7.0.0
+              uses: actions/checkout@v7.0.1
 
             - name: Install uv and set the Python version
               uses: astral-sh/setup-uv@v8.2.0
