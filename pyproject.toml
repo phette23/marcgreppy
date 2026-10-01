@@ -18,7 +18,7 @@ classifiers = [
     "Topic :: Utilities",
 ]
 dependencies = [
-    "click==8.4.2",
+    "click==8.5.0",
     "pymarc==5.4.0",
     "termcolor==3.3.0",
 ]
