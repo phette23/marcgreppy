@@ -4,7 +4,7 @@ from marcgrep.filter import Filter, FilterFormatError, parse_pattern
 
 
 @pytest.mark.parametrize(
-    ["input", "expected"],
+    ["data", "expected"],
     [
         ("245", ("245", None, None, None, None)),
         ("245,cat in the hat", ("245", None, None, None, "cat in the hat")),
@@ -16,12 +16,12 @@ from marcgrep.filter import Filter, FilterFormatError, parse_pattern
         ),
     ],
 )
-def test_parse_pattern(input, expected):
-    assert parse_pattern(input) == expected
+def test_parse_pattern(data, expected):
+    assert parse_pattern(data) == expected
 
 
 @pytest.mark.parametrize(
-    "input",
+    "data",
     [
         "",
         "1,field too short",
@@ -33,6 +33,6 @@ def test_parse_pattern(input, expected):
         "a12,another letter field",
     ],
 )
-def test_filter_validation_errors(input):
+def test_filter_validation_errors(data):
     with pytest.raises(FilterFormatError):
-        Filter(input)
+        Filter(data)

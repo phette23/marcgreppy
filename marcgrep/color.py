@@ -27,11 +27,9 @@ EMPTY_INDICATOR: str = env_get("EMPTY_INDICATOR", "_")
 
 
 def _set_color_env(token: str, invert: bool) -> str:
-    var = f"{token}_COLOR"
+    var: str = f"{token}_COLOR"
     # validate that termcolor supports the color
-    try:
-        assert environ.get(f"MARC_{var}", "black") in AVAILABLE_COLORS.keys()
-    except AssertionError:
+    if not environ.get(f"MARC_{var}", "black") in AVAILABLE_COLORS:
         raise ValueError(
             f'Invalid color "{environ.get(f"MARC_{var}")}" for MARC_{var}. '
             f"Valid colors are: {', '.join(AVAILABLE_COLORS.keys())}."
@@ -41,7 +39,7 @@ def _set_color_env(token: str, invert: bool) -> str:
     return env_get(var, COLOR_DARK_DEFAULTS[token])
 
 
-def _setup_colors(invert: bool):
+def _setup_colors(invert: bool) -> None:
     """Create COLORS global dict from env vars and invert flag
 
     Args:

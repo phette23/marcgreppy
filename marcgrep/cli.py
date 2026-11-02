@@ -1,5 +1,5 @@
 import sys
-from typing import BinaryIO, List
+from typing import BinaryIO
 
 import click
 from pymarc import MARCReader
@@ -28,7 +28,7 @@ from .filter import Filter
 )
 @click.version_option(package_name="marcgrep", message="%(prog)s %(version)s")
 def main(
-    files: List[BinaryIO],
+    files: list[BinaryIO],
     color: bool,
     invert: bool,
     count: bool,

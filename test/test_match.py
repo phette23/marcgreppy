@@ -11,7 +11,7 @@ with open(Path("test") / "fixtures" / "one_record.mrc", "rb") as fh:
 
 
 @pytest.mark.parametrize(
-    "input, expected",
+    "data, expected",
     [
         ("245", True),
         ("246", False),
@@ -42,14 +42,14 @@ with open(Path("test") / "fixtures" / "one_record.mrc", "rb") as fh:
         ("653,a,curly", True),
     ],
 )
-def test_single_inclusive_filter_matches(input, expected):
-    f = Filter(input)
+def test_single_inclusive_filter_matches(data, expected):
+    f = Filter(data)
     assert record is not None
     assert f.match(record) == expected
 
 
 @pytest.mark.parametrize(
-    "input,expected",
+    "data,expected",
     [
         ("245,1,,a,Kulturpolitik", False),
         ("245,1,0,,Kulturpolitik", False),
@@ -65,7 +65,7 @@ def test_single_inclusive_filter_matches(input, expected):
         ("245,1,2,,", True),
     ],
 )
-def test_single_exclusive_filter_matches(input, expected):
-    f = Filter(input, inclusive=False)
+def test_single_exclusive_filter_matches(data, expected):
+    f = Filter(data, inclusive=False)
     assert record is not None
     assert f.match(record) == expected

@@ -152,14 +152,12 @@ class TestCLI:
         assert "Network Analysis" in result.output
 
     @pytest.mark.parametrize(
-        "input,expected", [("1", "1"), ("10", "10"), ("100", "100")]
+        "data,expected", [("1", "1"), ("10", "10"), ("100", "100")]
     )
-    def test_limit(self, input, expected):
+    def test_limit(self, data, expected):
         runner = CliRunner()
         # all records have a 245 so the limit = the count
-        result = runner.invoke(
-            main, [OAPEN, "--limit", input, "-c", "--include", "245"]
-        )
+        result = runner.invoke(main, [OAPEN, "--limit", data, "-c", "--include", "245"])
         assert result.exit_code == 0
         assert result.output == f"{OAPEN}: {expected}\n"
 
@@ -172,13 +170,15 @@ class TestCLI:
         assert result.exit_code == 0
         assert result.output == f"{OAPEN}: 500\n{ONE_RECORD}: 1\n"
         # should still work with stdin
-        result = runner.invoke(
-            main,
-            ["-f", "245", "-"],
-            input=open(ONE_RECORD, "rb").read(),
-        )
-        assert result.exit_code == 0
-        assert len(result.output.splitlines()) == 1
+        with open(ONE_RECORD, "rb") as f:
+            data = f.read()
+            result = runner.invoke(
+                main,
+                ["-f", "245", "-"],
+                input=data,
+            )
+            assert result.exit_code == 0
+            assert len(result.output.splitlines()) == 1
 
     def test_color_leader(self):
         runner = CliRunner()
