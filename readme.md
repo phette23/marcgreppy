@@ -95,7 +95,7 @@ uv run ruff check . # lint code
 uv build # build package, used in CI
 ```
 
-Any tag triggers a release to [Test PyPI](https://test.pypi.org/project/marcgrep/). Any tag beginning with the letter `v` requires manual approval to be released to [PyPI](https://pypi.org/project/marcgrep/) and [GitHub](https://github.com/phette23/marcgreppy/releases). There are protection rules on the `pypi` and `testpypi` [environments](https://github.com/phette23/marcgreppy/settings/environments) to this effect, too.
+Any tag triggers a release to [Test PyPI](https://test.pypi.org/project/marcgrep/). Any tag beginning with the letter `v` requires manual approval to be released to [PyPI](https://pypi.org/project/marcgrep/) and [GitHub](https://github.com/phette23/marcgreppy/releases). **Remember to increment the version in pyproject.toml** or the PYPI publish will fail. There are protection rules on the `pypi` and `testpypi` [environments](https://github.com/phette23/marcgreppy/settings/environments) to this effect, too.
 
 ## License
 
