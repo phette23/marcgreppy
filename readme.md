@@ -90,6 +90,8 @@ You can also configure the subfield delimiter character and the symbol for an em
 ```sh
 uv sync # install dependencies
 uv run pytest # run tests
+uv run ruff format . # format code
+uv run ruff check . # lint code
 uv build # build package, used in CI
 ```
 
