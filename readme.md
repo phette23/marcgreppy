@@ -9,8 +9,8 @@ A CLI for searching MARC files like [MARCgrep.pl](https://pusc.it/bib/MARCgrep) 
 Python 3.10 or later.
 
 ```sh
+uv tool install marcgrep # install globally with uv
 pipx install marcgrep # install globally with pipx
-pip install marcgrep # or use pip/pip3
 ```
 
 ## Usage
